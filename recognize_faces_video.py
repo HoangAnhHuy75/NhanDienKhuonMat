@@ -16,6 +16,8 @@ data = pickle.loads(open("encodings.pickle", "rb").read())
 # Khởi động camera
 print("[INFO] Khởi động camera...")
 video = cv2.VideoCapture(0)
+video.set(3,1000)
+video.set(4,800)
 writer = None
 
 # Chờ camera sẵn sàng
@@ -53,9 +55,14 @@ while True:
     # Vẽ bounding box và tên trên frame
     for ((top, right, bottom, left), name) in zip(boxes, names):
         top, right, bottom, left = int(top * r), int(right * r), int(bottom * r), int(left * r)
+        if name == "Unknown":
+            display_text = "Unknown"
+        if "_" in name:
+            user_id, user_name= name.split("_",1)
+            display_text = f"ID: {user_id}, Name : {user_name}"
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
         y = top - 15 if top - 15 > 15 else top + 15
-        cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        cv2.putText(frame, display_text, (left, y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
     # Hiển thị video
     if 1 > 0:
