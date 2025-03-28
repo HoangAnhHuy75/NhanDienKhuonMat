@@ -1,6 +1,10 @@
 import cv2
 import os
+<<<<<<< HEAD
 name=input("Hãy nhập tên của bạn : ")
+=======
+name=input("Hãy nhập tên của bạn : ").strip()
+>>>>>>> a21c82a (first)
 #khởi tạo đường dẫn vào trong thư mục dataset
 output_path=os.path.join("dataset",name)
 os.makedirs(output_path)
